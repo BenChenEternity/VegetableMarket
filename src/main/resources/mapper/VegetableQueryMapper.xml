@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ajie.wiki.MarketManager.mapper.VegetableMapper">
+    <select id="getVegetables" parameterType="map" resultType="ajie.wiki.MarketManager.entity.sql.Vegetable">
+        SELECT * FROM vegetables
+        <where>
+            <if test="name != null">
+                AND Name = #{name}
+            </if>
+            <if test="productionDate != null">
+                AND ProductionDate = #{productionDate}
+            </if>
+            <if test="shelfLife != null">
+                AND ShelfLife = #{shelfLife}
+            </if>
+            <if test="shelfDate != null">
+                AND ShelfDate = #{shelfDate}
+            </if>
+            <if test="price != null">
+                AND Price = #{price}
+            </if>
+            <if test="stock != null">
+                AND Stock = #{stock}
+            </if>
+            <if test="supplier != null">
+                AND Supplier = #{supplier}
+            </if>
+            <if test="sale != null">
+                AND Sale = #{sale}
+            </if>
+        </where>
+        <if test="offset != null and pageSize != null">
+            LIMIT #{pageSize} OFFSET #{offset}
+        </if>
+    </select>
+
+    <insert id="insertVegetable" parameterType="ajie.wiki.MarketManager.entity.sql.Vegetable">
+        INSERT INTO vegetables (Name, Description, Unit, ProductionDate, ShelfLife, ShelfDate, Price, Stock, Supplier,
+                                Sale)
+        VALUES (#{name}, #{description}, #{unit}, #{productionDate}, #{shelfLife}, #{shelfDate}, #{price}, #{stock},
+                #{supplier}, #{sale})
+    </insert>
+
+    <delete id="deleteVegetable" parameterType="Integer">
+        DELETE
+        FROM vegetables
+        WHERE ID = #{id}
+    </delete>
+
+    <select id="getVegetableCount" parameterType="map" resultType="Integer">
+        SELECT COUNT(*) FROM vegetables
+        <where>
+            <if test="name != null">
+                AND Name = #{name}
+            </if>
+            <if test="productionDate != null">
+                AND ProductionDate = #{productionDate}
+            </if>
+            <if test="shelfLife != null">
+                AND ShelfLife = #{shelfLife}
+            </if>
+            <if test="shelfDate != null">
+                AND ShelfDate = #{shelfDate}
+            </if>
+            <if test="price != null">
+                AND Price = #{price}
+            </if>
+            <if test="stock != null">
+                AND Stock = #{stock}
+            </if>
+            <if test="supplier != null">
+                AND Supplier = #{supplier}
+            </if>
+            <if test="sale != null">
+                AND Sale = #{sale}
+            </if>
+        </where>
+    </select>
+</mapper>
+
+
